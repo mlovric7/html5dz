@@ -71,7 +71,7 @@ function createAsteroids() {
         // Set a random size of the asteroid between 20 and 100
         const asteroidSize = Math.random() * 80 + 20;
 
-        // Set random x pos between -500 and window.innerWidth + 500
+        // Set random x pos between -max_distance and window.innerWidth + max_distance
         const x = Math.random() * (window.innerWidth + max_distance*2) - max_distance;
 
         let y;
@@ -92,7 +92,7 @@ function createAsteroids() {
 
         asteroids.push(new component(asteroidSize, asteroidSize, getRandomGray(), // Size and color of the asteroid
             x, y, 'asteroid', // Type and initial position
-            speed_x, speed_y)); // Random speed between 1 and 3
+            speed_x, speed_y)); // Speed of the asteroid
     }
     numberOfAsteroids += 1; // Add 1 more asteroid to the generation each time
 }
@@ -104,13 +104,13 @@ function getSpeedForPosition(position, inverted = false) {
     const min_speed = 0.5
     let speed;
     if (position < 0) {
-        // If x is to the left of the canvas, set speed_x to a positive value
+        // If position is to the left of the canvas, set speed to a positive value
         speed = Math.random() * max_speed + min_speed; // Random speed between 0.5 and 5.5
     } else if (position > window.innerWidth) {
-        // If x is to the right of the canvas, set speed_x to a negative value
+        // If position is to the right of the canvas, set speed to a negative value
        speed = -(Math.random() * max_speed + min_speed); // Random speed between -0.5 and -5.5
     } else {
-        // If x is anywhere in the canvas, set speed_x to a random speed positive or negative
+        // If position is anywhere in the canvas, set speed to a random speed positive or negative
         speed = Math.random() < 0.5 ? -(Math.random() * max_speed + 0.5) : Math.random() * max_speed + min_speed;
     }
     return inverted ? -speed : speed;
